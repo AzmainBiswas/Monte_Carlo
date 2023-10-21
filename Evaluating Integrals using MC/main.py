@@ -6,7 +6,7 @@ I = 1000  # numbre of iterations
 A = 0.0  # upper limit
 B = 1  # lower limit
 
-def fun(x):
+def fun(x): # function to be integrated
   return np.exp(-(x**2)/2)
 
 Integrations = []
