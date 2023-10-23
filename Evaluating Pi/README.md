@@ -1,6 +1,10 @@
 # Evaluating The Valu of Pi
 
-| n        | Monte Carlo Estimate of PI |
+Evaluating the value of $\pi$ using Monte Carlo simulation.
+
+## Result
+
+| n        | Monte Carlo Estimate of $\pi$ |
 |----------|----------------------------|
 | 100      | 2.92                       |
 | 1000     | 3.2                        |
