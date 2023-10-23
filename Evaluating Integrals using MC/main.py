@@ -1,36 +1,31 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import csv
 
-S = 1000  # number of simulations
-I = 1000  # numbre of iterations
-A = 0.0  # upper limit
-B = 1  # lower limit
+UpLimit = 1  # upper limit
+LowerLimit = 0  # lower limit
 
 
 def fun(x):  # function to be integrated
     return np.exp(-(x**2) / 2)
 
 
-Integrations = []
-for i in range(S):
-    Sum = 0
-    for i in range(I):
-        x = np.random.uniform(0, 1)
-        mod_fun = fun((B - A) * x + A) * (B - A)
-        Sum += mod_fun
+def MonteCarlo(fun, UpLimit, LowerLimit, SimNumber):
+    I = 10000  # number of itaration
+    IntegralValues = []
+    for i in range(SimNumber):
+        X = np.random.uniform(LowerLimit, UpLimit, I)
+        ValuesOfFunction = fun(X)
+        SumfFunction = ValuesOfFunction.sum()
+        IntegralValue = SumfFunction / float(len(ValuesOfFunction))
+        IntegralValues.append(IntegralValue)
+    return sum(IntegralValues) / len(IntegralValues)
 
-    Int = Sum / float(I)
-    Integrations.append(Int)
 
-sum = 0
-for i in Integrations:
-    sum += i
-sample_expection = sum / float(S)
-
-print("")
-print(f"Sample Expection: {sample_expection}")
-
-plt.title("Evaluating Integral")
-plt.grid()
-plt.hist(Integrations, bins=50, edgecolor="#000000")
-plt.show()
+with open("Value_of_Integral.csv", "w", newline='') as file:
+    writter = csv.writer(file)
+    writter.writerow(["n", "Value of Integration"])
+    for n in [50, 100, 1000, 10000, 100000]:
+        writter.writerow([n,MonteCarlo(fun=fun, UpLimit=UpLimit, LowerLimit=LowerLimit, SimNumber=n)])
+    file.close
+    
