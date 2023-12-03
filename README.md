@@ -1,1 +1,1 @@
-This is my master project.
+This is my master project about simulation and Markov Chain Monte Carlo
